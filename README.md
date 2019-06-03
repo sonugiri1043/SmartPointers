@@ -1,5 +1,2 @@
 # SmartPointers
-C++ Smart pointers. unique_ptr, shared_ptr usage and Implement your own.
-
-
-Avijit wick
+Usage of unique_ptr, shared_ptr and Implement your own shared_ptr.
