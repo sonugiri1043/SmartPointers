@@ -60,6 +60,25 @@ void test_my_shared_ptr_assignment() {
   cout<< endl;
 }
 
+void test_my_shared_ptr_assignment1() {
+  cout<< "Test assignment 2" << endl;
+  shared_ptr<Test> ptr1( new Test() );
+  shared_ptr<Test> ptr2( new Test() );
+  cout<< "ptr1:" << ptr1.get() << endl;
+  cout<< "ptr2:" << ptr2.get() << endl;
+  ptr1 = ptr2;
+  cout<< "After ptr1=ptr2" << endl;
+  cout << "ptr1: " << ptr1.use_count() << ":" << ptr1.get() << endl;
+  cout << "ptr2: " << ptr2.use_count() << ":" << ptr2.get() << endl;
+
+  my_shared_ptr<Test> my_ptr1( new Test() );
+  my_shared_ptr<Test> my_ptr2( new Test() );
+  my_ptr1 = my_ptr2;
+  cout << my_ptr1.use_count() << ":" << my_ptr1.get() << endl;
+  cout << my_ptr2.use_count() << ":" << my_ptr2.get() << endl;
+  cout<< endl;
+}
+
 void test_my_shared_ptr_copy() {
   cout<< "Test copy operation" << endl; 
   shared_ptr< Test > ptr( new Test() ); 
@@ -102,6 +121,7 @@ int main() {
   test_my_shared_ptr();
   test_my_shared_ptr_creation();
   test_my_shared_ptr_assignment();
+  test_my_shared_ptr_assignment1();
   test_my_shared_ptr_copy();
   test_my_shared_ptr_reset();
   return 0;

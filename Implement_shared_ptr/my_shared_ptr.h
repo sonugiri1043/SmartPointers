@@ -1,4 +1,8 @@
-#include <memory>
+/* my_share_ptr.h
+   Mimics some functionality of std::shared_ptr
+
+   Only for demo purporse.
+*/
 
 template< class T > class my_shared_ptr {
  public:
@@ -13,6 +17,7 @@ template< class T > class my_shared_ptr {
     *ref_count = 1;
   }
 
+  // copy constructor
   my_shared_ptr( const my_shared_ptr< T > &sp ) {
     if( sp.ref_count ) {
       *sp.ref_count = *sp.ref_count + 1;
@@ -20,7 +25,7 @@ template< class T > class my_shared_ptr {
       this->obj_ptr = sp.obj_ptr;
     }  
   }  
-   
+  
   ~my_shared_ptr() {
     if( ref_count != NULL ) {
       *ref_count = *ref_count - 1;
@@ -32,14 +37,18 @@ template< class T > class my_shared_ptr {
       }
     }
   }     
-            
+  
+  // = operator overload
   my_shared_ptr< T > & operator=( my_shared_ptr< T > &sp ) {
+    if( this->ref_count ) {
+      this->~my_shared_ptr();
+    }
     *sp.ref_count = *sp.ref_count + 1;
     this->ref_count = sp.ref_count;
     this->obj_ptr = sp.obj_ptr;
     return *this;
-  }        
-            
+  }
+
   void reset() {
     if( ref_count ) {
       if( *ref_count > 1 ) {
@@ -70,4 +79,3 @@ template< class T > class my_shared_ptr {
   int *ref_count;
   T *obj_ptr;
 };
-
